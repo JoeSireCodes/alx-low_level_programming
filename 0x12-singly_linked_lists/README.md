@@ -5,6 +5,7 @@
 *It contains the header file and six different task
 
 ## More Info
+
 Please use this data structure for this project:
 
 /**
@@ -15,9 +16,11 @@ Please use this data structure for this project:
  *
  * Description: singly linked list node structure
  */
+
 typedef struct list_s
+
 {
     char *str;
     unsigned int len;
     struct list_s *next;
-} list_t;`
+} list_t;
