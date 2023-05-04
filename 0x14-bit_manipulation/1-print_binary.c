@@ -6,21 +6,25 @@
  */
 void print_binary(unsigned long int n)
 {
-	int i, score = 0;
-	unsigned long int status;
+	unsigned long int mask = 1UL << (63);
 
-	for (i = 63; i >= 0; i--)
+	int printed = 0;
+
+	for (; mask != 0; mask >>= 1)
 	{
-		status = n >> i;
-
-		if (status & 1)
+		if ((n & mask) != 0)
 		{
 			_putchar('1');
-			score++;
+			printed = 1;
 		}
-		else if (score)
+		else if (printed)
+		{
 			_putchar('0');
+		}
 	}
-	if (!score)
-		_putchare('0');
+	if (!printed)
+	{
+		_putchar('0');
+	}
 }
+
