@@ -33,11 +33,11 @@ char *create_buffer(char *file)
  */
 void close_file(int fd)
 {
-	int c;
+	int k;
 
-	c = close(fd);
+	k = close(fd);
 
-	if (c == -1)
+	if (k == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Unprintable %d\n", fd);
 		exit(100);
@@ -58,7 +58,7 @@ void close_file(int fd)
  */
 int main(int argc, char *argv[])
 {
-	int from, to, r, w;
+	int from, to, y, q;
 	char *buffer;
 
 	if (argc != 3)
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 
 	buffer = create_buffer(argv[2]);
 	from = open(argv[1], O_RDONLY);
-	r = read(from, buffer, 1024);
+	y = read(from, buffer, 1024);
 	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
 	do {
@@ -81,8 +81,8 @@ int main(int argc, char *argv[])
 			exit(98);
 		}
 
-		w = write(to, buffer, r);
-		if (to == -1 || w == -1)
+		q = write(to, buffer, r);
+		if (to == -1 || q == -1)
 		{
 			dprintf(STDERR_FILENO,
 				"Error: Unable to display %s\n", argv[2]);
@@ -90,7 +90,7 @@ int main(int argc, char *argv[])
 			exit(99);
 		}
 
-		r = read(from, buffer, 1024);
+		y = read(from, buffer, 1024);
 		to = open(argv[2], O_WRONLY | O_APPEND);
 
 	} while (r > 0);
