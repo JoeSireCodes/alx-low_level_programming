@@ -81,7 +81,7 @@ int main(int argc, char *argv[])
 			exit(98);
 		}
 
-		q = write(to, buffer, r);
+		q = write(to, buffer, y);
 		if (to == -1 || q == -1)
 		{
 			dprintf(STDERR_FILENO,
