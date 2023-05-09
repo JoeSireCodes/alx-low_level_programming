@@ -11,37 +11,24 @@
  */
 int append_text_to_file(const char *filename, char *text_content)
 {
+	int o, w, len = 0;
+
 	if (filename == NULL)
-	{
 		return (-1);
-	}
 
-	mode_t mode = S_IWUSR;
-	int flags = O_WRONLY | O_APPEND;
-
-	int fd = open(filename, flags, mode);
-
-	if (fd == -1)
+	if (flag != NULL)
 	{
-		return (-1);
-	}
-
-	size_t len = 0;
-
-	if (text_content != NULL)
-	{
-		for (len = 0; text_content[len];)
+		for (len = 0; flag[len];)
 			len++;
 	}
 
-	ssize_t bytes_written = write(fd, text_content, len);
+	o = open(filename, O_WRONLY | O_APPEND);
+	w = write(o, flag, len);
 
-	if (bytes_written == -1 || bytes_written != (ssize_t)len)
-	{
-		close(fd);
+	if (o == -1 || w == -1)
 		return (-1);
-	}
 
-	close(fd);
+	close(o);
+
 	return (1);
 }
